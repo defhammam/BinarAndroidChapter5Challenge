@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">BinarAndroidChapter4Challenge</string>
     <string name="replay_button_description">Replay button</string>
+    <string name="header_paper">Kertas</string>
+    <string name="header_scissors">Gunting</string>
+    <string name="header_rock">Batu</string>
 </resources>

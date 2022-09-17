@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="replay_button_description">Replay button</string>
+    <string name="header_paper">Kertas</string>
+    <string name="header_scissors">Gunting</string>
+    <string name="header_rock">Batu</string>
 </resources>
