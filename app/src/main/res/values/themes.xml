@@ -13,4 +13,33 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Text.Base" parent="Theme.BinarAndroidChapter4Challenge">
+        <item name="android:fontFamily">@font/comic_neue_bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    
+    <style name="Text.Header" parent="Text.Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="Text.Player" parent="Text.Base">
+        <item name="android:textColor">@color/light_blue_600</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginTop">75dp</item>
+    </style>
+
+    <style name="Base.Button" parent="Theme.BinarAndroidChapter4Challenge">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">100dp</item>
+    </style>
+
+    <style name="Base.Icon" parent="Theme.BinarAndroidChapter4Challenge">
+        <item name="android:tint">@color/black</item>
+    </style>
 </resources>
