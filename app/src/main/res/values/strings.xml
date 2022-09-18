@@ -7,4 +7,10 @@
     <string name="player_one">Pemain 1</string>
     <string name="player_cpu">CPU</string>
     <string name="middle_versus">VS</string>
+    <string name="player_rock_button">Button for player one to choose \"rock\"</string>
+    <string name="player_paper_button">Button for player one to choose \"paper\"</string>
+    <string name="player_scissors_button">Button for player one to choose \"scissors\"</string>
+    <string name="bot_rock_button">Button to indicate that the bot has chosen \"rock\"</string>
+    <string name="bot_paper_button">Button to indicate that the bot has chosen \"paper\"</string>
+    <string name="bot_scissors_button">Button to indicate that the bot has chosen \"scissors\"</string>
 </resources>
