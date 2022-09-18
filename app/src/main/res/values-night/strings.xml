@@ -4,4 +4,7 @@
     <string name="header_paper">Kertas</string>
     <string name="header_scissors">Gunting</string>
     <string name="header_rock">Batu</string>
+    <string name="player_one">Pemain 1</string>
+    <string name="player_cpu">CPU</string>
+    <string name="middle_versus">VS</string>
 </resources>

@@ -7,47 +7,109 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_header_paper"
         style="@style/Text.Header"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/amber_700"
-        android:id="@+id/tv_header_paper"
-        android:text="@string/header_paper"/>
+        android:text="@string/header_paper"
+        android:textColor="#EF6C00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        style="@style/Text.Header"
-        app:layout_constraintTop_toBottomOf="@id/tv_header_paper"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/light_green_500"
         android:id="@+id/tv_header_scissors"
-        android:text="@string/header_scissors"/>
+        style="@style/Text.Header"
+        android:text="@string/header_scissors"
+        android:textColor="#689F38"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_paper" />
 
     <TextView
+        android:id="@+id/tv_header_rock"
         style="@style/Text.Header"
-        app:layout_constraintTop_toBottomOf="@id/tv_header_scissors"
+        android:text="@string/header_rock"
+        android:textColor="@color/purple_300"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/purple_300"
-        android:id="@+id/tv_header_rock"
-        android:text="@string/header_rock"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_header_scissors" />
+
+    <TextView
+        android:id="@+id/tv_player_one"
+        style="@style/Text.Player"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/player_one"
+        android:textColor="#039BE5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_rock" />
+
+    <TextView
+        android:id="@+id/tv_player_cpu"
+        style="@style/Text.Player"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/player_cpu"
+        android:textColor="#039BE5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_rock" />
+
+    <FrameLayout
+        android:id="@+id/fl_versus"
+        android:layout_width="wrap_content"
+        android:layout_height="240dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_rock"
+        app:layout_constraintStart_toEndOf="@id/tv_player_one"
+        app:layout_constraintEnd_toStartOf="@id/tv_player_cpu">
+
+        <TextView
+            style="@style/Text.Base"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:textSize="75sp"
+            android:textColor="#F44336"
+            android:text="@string/middle_versus"/>
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/fl_replay_button"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintDimensionRatio="0.5:1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="0.5:1"
         app:layout_constraintRight_toRightOf="parent">
-        
+
         <ImageView
             style="@style/Base.Icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_refresh"
-            android:contentDescription="@string/replay_button_description" />
+            android:contentDescription="@string/replay_button_description"
+            android:src="@drawable/ic_refresh" />
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
