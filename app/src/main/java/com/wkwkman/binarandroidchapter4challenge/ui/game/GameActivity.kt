@@ -23,28 +23,28 @@ class GameActivity : AppCompatActivity(), GameListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        supportActionBar?.hide()
         gameManager.launchGame()
         getButtonResponses()
         gameManager.playGame()
-        supportActionBar?.hide()
     }
 
     private fun getButtonResponses() {
         binding.apply {
             ivPlayerRock.setOnClickListener {
-                Log.d(TAG, "initButton: Player Rock was clicked")
+                Log.d(TAG, "getButtonResponses: Player Rock was clicked")
                 gameManager.playerChoseRock()
             }
             ivPlayerPaper.setOnClickListener {
-                Log.d(TAG, "initButton: Player Paper was clicked")
+                Log.d(TAG, "getButtonResponses: Player Paper was clicked")
                 gameManager.playerChosePaper()
             }
             ivPlayerScissors.setOnClickListener {
-                Log.d(TAG, "initButton: Player Scissors was clicked")
+                Log.d(TAG, "getButtonResponses: Player Scissors was clicked")
                 gameManager.playerChoseScissors()
             }
             flReplayButton.setOnClickListener {
-                Log.d(TAG, "initButton: Replay was clicked")
+                Log.d(TAG, "getButtonResponses: Replay was clicked")
                 gameManager.launchGame()
             }
         }
