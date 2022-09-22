@@ -1,13 +1,13 @@
-package com.wkwkman.binarandroidchapter4challenge
+package com.wkwkman.binarandroidchapter4challenge.ui.game
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.wkwkman.binarandroidchapter4challenge.databinding.ActivityMainBinding
+import com.wkwkman.binarandroidchapter4challenge.databinding.ActivityGameBinding
 
-class MainActivity : AppCompatActivity() {
-    private val binding: ActivityMainBinding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
+class GameActivity : AppCompatActivity() {
+    private val binding: ActivityGameBinding by lazy {
+        ActivityGameBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = MainActivity::class.java.simpleName
+        private val TAG = GameActivity::class.java.simpleName
     }
 }
 
