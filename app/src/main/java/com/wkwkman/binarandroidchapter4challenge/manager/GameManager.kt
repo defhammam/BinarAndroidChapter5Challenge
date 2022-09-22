@@ -6,8 +6,11 @@ import com.wkwkman.binarandroidchapter4challenge.model.Player
 import kotlin.random.Random
 
 interface GameManager {
-    fun cleanStartGame()
-    fun startOrRestartGame()
+    fun launchGame()
+    fun playGame()
+    fun playerChoseRock()
+    fun playerChosePaper()
+    fun playerChoseScissors()
 }
 
 interface GameListener {
@@ -28,7 +31,7 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
     }
     */
 
-    override fun cleanStartGame() {
+    override fun launchGame() {
         setGameState(GameState.IDLE)
         player = Player(PlayerSide.PLAYER_ONE, PlayerChoice.UNDECIDED)
         bot = Player(PlayerSide.PLAYER_TWO, PlayerChoice.UNDECIDED)
@@ -44,20 +47,17 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
         return PlayerChoice.values()[index]
     }
 
-    private fun getBotChoice(): PlayerChoice {
+    private fun generateBotChoice() {
         val randomChoice = Random.nextInt(0, until = PlayerChoice.values().size)
-        return getPlayerChoiceByOrdinal(randomChoice)
+        bot.playerChoice = getPlayerChoiceByOrdinal(randomChoice)
+        listener.onPlayerStatusChanged(
+            bot,
+            getDrawableByChoice(bot.playerChoice)
+        )
     }
 
-    override fun startOrRestartGame() {
-        if (gameState != GameState.FINISHED) { startGame() }
-        else { cleanStartGame() }
-    }
-
-    private fun startGame() {
-        bot.apply {
-            playerChoice = getBotChoice()
-        }
+    override fun playGame() {
+        generateBotChoice()
         findResult()
     }
 
@@ -73,19 +73,23 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
         listener.onGameFinished(gameState, finalResult)
     }
 
+    override fun playerChoseRock() {
+        setPlayerChoice(PlayerChoice.ROCK)
+    }
+
+    override fun playerChosePaper() {
+        setPlayerChoice(PlayerChoice.PAPER)
+    }
+
+    override fun playerChoseScissors() {
+        setPlayerChoice(PlayerChoice.SCISSORS)
+    }
+
     private fun setPlayerChoice(newChoice: PlayerChoice = player.playerChoice) {
         player.apply { this.playerChoice = newChoice }
         listener.onPlayerStatusChanged(
             player,
             getDrawableByChoice(player.playerChoice)
-        )
-    }
-
-    private fun setBotChoice(newChoice: PlayerChoice = bot.playerChoice) {
-        bot.apply { this.playerChoice = newChoice }
-        listener.onPlayerStatusChanged(
-            bot,
-            getDrawableByChoice(bot.playerChoice)
         )
     }
 
