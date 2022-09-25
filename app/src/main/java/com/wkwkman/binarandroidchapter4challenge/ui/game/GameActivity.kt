@@ -115,7 +115,7 @@ class GameActivity: AppCompatActivity(), GameListener {
         }
     }
 
-    override fun onGameFinished(gameState: GameState, gameResult: GameResult) {
+    override fun onResultDisplayed(gameResult: GameResult) {
         binding.tvVersus.visibility = View.INVISIBLE
         when (gameResult) {
             GameResult.DRAW -> {

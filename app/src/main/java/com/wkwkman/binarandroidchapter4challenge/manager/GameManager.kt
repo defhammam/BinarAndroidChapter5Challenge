@@ -16,7 +16,7 @@ interface GameManager {
 interface GameListener {
     fun onPlayerChoiceSelected(player: Player)
     fun onGameLaunched()
-    fun onGameFinished(gameState: GameState, gameResult: GameResult)
+    fun onResultDisplayed(gameResult: GameResult)
 }
 
 // Reference [10]
@@ -57,7 +57,7 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
             else -> GameResult.PLAYER_WINS
         }
         gameState = GameState.FINISHED
-        listener.onGameFinished(gameState, finalResult)
+        listener.onResultDisplayed(finalResult)
     }
 
     override fun playerChoseRock() {
