@@ -49,8 +49,8 @@ class GameActivity: AppCompatActivity(), GameListener {
                 Log.d(TAG, "getButtonResponses: Player Scissors was clicked")
                 gameManager.playerChoseScissors()
             }
-            flReplayButton.setOnClickListener {
-                Log.d(TAG, "getButtonResponses: Replay was clicked")
+            flRestartButton.setOnClickListener {
+                Log.d(TAG, "getButtonResponses: Restart was clicked")
                 runGame()
             }
         }
@@ -78,20 +78,19 @@ class GameActivity: AppCompatActivity(), GameListener {
 
         when (player.playerChoice) {
             // Reference [6]
-            // Background color of the selected choice will not be transparent
             PlayerChoice.ROCK -> {
                 ivChoiceRock.setBackgroundResource(R.color.cyan_A400)
-                ivChoicePaper.setBackgroundResource(R.color.cyan_transparent)
-                ivChoiceScissors.setBackgroundResource(R.color.cyan_transparent)
+                ivChoicePaper.setBackgroundResource(R.color.custom_transparent)
+                ivChoiceScissors.setBackgroundResource(R.color.custom_transparent)
             }
             PlayerChoice.PAPER -> {
-                ivChoiceRock.setBackgroundResource(R.color.cyan_transparent)
+                ivChoiceRock.setBackgroundResource(R.color.custom_transparent)
                 ivChoicePaper.setBackgroundResource(R.color.cyan_A400)
-                ivChoiceScissors.setBackgroundResource(R.color.cyan_transparent)
+                ivChoiceScissors.setBackgroundResource(R.color.custom_transparent)
             }
             PlayerChoice.SCISSORS -> {
-                ivChoiceRock.setBackgroundResource(R.color.cyan_transparent)
-                ivChoicePaper.setBackgroundResource(R.color.cyan_transparent)
+                ivChoiceRock.setBackgroundResource(R.color.custom_transparent)
+                ivChoicePaper.setBackgroundResource(R.color.custom_transparent)
                 ivChoiceScissors.setBackgroundResource(R.color.cyan_A400)
             }
             else -> {}
@@ -103,13 +102,14 @@ class GameActivity: AppCompatActivity(), GameListener {
             tvVersus.visibility = View.VISIBLE
             cvResultDraw.visibility = View.INVISIBLE
             llResultWin.visibility = View.INVISIBLE
+            // Reference [8]
             // Reset all choices to be unselected (transparent)
-            ivPlayerRock.setBackgroundResource(R.color.cyan_transparent)
-            ivPlayerPaper.setBackgroundResource(R.color.cyan_transparent)
-            ivPlayerScissors.setBackgroundResource(R.color.cyan_transparent)
-            ivBotRock.setBackgroundResource(R.color.cyan_transparent)
-            ivBotPaper.setBackgroundResource(R.color.cyan_transparent)
-            ivBotScissors.setBackgroundResource(R.color.cyan_transparent)
+            ivPlayerRock.setBackgroundResource(R.color.custom_transparent)
+            ivPlayerPaper.setBackgroundResource(R.color.custom_transparent)
+            ivPlayerScissors.setBackgroundResource(R.color.custom_transparent)
+            ivBotRock.setBackgroundResource(R.color.custom_transparent)
+            ivBotPaper.setBackgroundResource(R.color.custom_transparent)
+            ivBotScissors.setBackgroundResource(R.color.custom_transparent)
             // Mitigation in case the string in "winner result" will be concatenated
             tvWinner.text = ""
         }
@@ -130,8 +130,14 @@ class GameActivity: AppCompatActivity(), GameListener {
                     llResultWin.visibility = View.VISIBLE
                     // Reference [7]
                     tvWinner.text = when (gameResult) {
-                        GameResult.PLAYER_WINS -> getString(R.string.player_one)
-                        else -> getString(R.string.player_cpu)
+                        GameResult.PLAYER_WINS -> {
+                            llResultWin.setBackgroundResource(R.color.light_green_700)
+                            getString(R.string.player_one)
+                        }
+                        else -> {
+                            llResultWin.setBackgroundResource(R.color.brown_500)
+                            getString(R.string.player_cpu)
+                        }
                     }
                 }
             }
@@ -148,5 +154,6 @@ References:
 [5] https://stackoverflow.com/questions/2459916/how-to-make-an-imageview-with-rounded-corners
 [6] https://stackoverflow.com/questions/8090459/android-dynamically-change-textview-background-color
 [7] https://stackoverflow.com/questions/44096838/kotlin-how-to-get-and-set-a-text-to-textview-in-android-using-kotlin
+[8] https://stackoverflow.com/questions/1492554/set-transparent-background-of-an-imageview-on-android
 
  */
