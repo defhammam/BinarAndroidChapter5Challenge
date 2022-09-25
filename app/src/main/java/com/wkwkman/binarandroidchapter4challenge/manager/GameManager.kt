@@ -1,6 +1,5 @@
 package com.wkwkman.binarandroidchapter4challenge.manager
 
-import com.wkwkman.binarandroidchapter4challenge.R
 import com.wkwkman.binarandroidchapter4challenge.enum.*
 import com.wkwkman.binarandroidchapter4challenge.model.Player
 import kotlin.properties.Delegates
@@ -15,34 +14,23 @@ interface GameManager {
 }
 
 interface GameListener {
-    fun onPlayerStatusChanged(player: Player, iconDrawableRes: Int)
-    fun onGameStateChanged(gameState: GameState)
+    fun onPlayerChoiceSelected(player: Player)
+    fun onGameLaunched()
     fun onGameFinished(gameState: GameState, gameResult: GameResult)
 }
 
-// Reference [1]
+// Reference [8]
 class RoshamboGameManager(private val listener: GameListener): GameManager {
     private lateinit var player: Player
     private lateinit var bot: Player
     private lateinit var gameState: GameState
     private var botChoiceIndex by Delegates.notNull<Int>()
 
-    /*
-    private fun notifyPlayerDataChanged() {
-        TODO("Not yet implemented")
-    }
-    */
-
     override fun launchGame() {
-        setGameState(GameState.IDLE)
         player = Player(PlayerSide.PLAYER_ONE, PlayerChoice.UNDECIDED)
         bot = Player(PlayerSide.PLAYER_TWO, PlayerChoice.UNDECIDED)
-        setGameState(GameState.STARTED)
-    }
-
-    private fun setGameState(newGameState: GameState) {
-        gameState = newGameState
-        listener.onGameStateChanged(gameState)
+        gameState = GameState.STARTED
+        listener.onGameLaunched()
     }
 
     private fun getPlayerChoiceByOrdinal(index: Int): PlayerChoice {
@@ -52,10 +40,7 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
     private fun generateBotChoice() {
         botChoiceIndex = Random.nextInt(0, until = PlayerChoice.values().size)
         bot.playerChoice = getPlayerChoiceByOrdinal(botChoiceIndex)
-        listener.onPlayerStatusChanged(
-            bot,
-            getDrawableByChoice(bot.playerChoice)
-        )
+        listener.onPlayerChoiceSelected(bot)
     }
 
     override fun playGame() {
@@ -65,13 +50,13 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
 
     private fun findResult() {
         val playerChoiceIndex = PlayerChoice.values().indexOf(player.playerChoice)
-        // Reference [2]
+        // Reference [9]
         val finalResult = when {
             (playerChoiceIndex + 1) % 3 == botChoiceIndex -> GameResult.BOT_WINS
             playerChoiceIndex == botChoiceIndex -> GameResult.DRAW
             else -> GameResult.PLAYER_WINS
         }
-        setGameState(GameState.FINISHED)
+        gameState = GameState.FINISHED
         listener.onGameFinished(gameState, finalResult)
     }
 
@@ -89,24 +74,12 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
 
     private fun setPlayerChoice(newChoice: PlayerChoice = player.playerChoice) {
         player.playerChoice = newChoice
-        listener.onPlayerStatusChanged(
-            player,
-            getDrawableByChoice(player.playerChoice)
-        )
-    }
-
-    private fun getDrawableByChoice(desiredChoice: PlayerChoice): Int {
-        return when (desiredChoice) {
-            PlayerChoice.ROCK -> R.drawable.ic_rock
-            PlayerChoice.PAPER -> R.drawable.ic_paper
-            PlayerChoice.SCISSORS -> R.drawable.ic_scissors
-            else -> Random.nextInt(0, until = PlayerChoice.values().size)
-        }
+        listener.onPlayerChoiceSelected(player)
     }
 }
 
 /*
 * References:
-* [1]   https://teachinghistory.org/history-content/ask-a-historian/23932
-* [2]   https://learningpenguin.net/2020/02/06/a-simple-algorithm-for-calculating-the-result-of-rock-paper-scissors-game/
+* [8]   https://teachinghistory.org/history-content/ask-a-historian/23932
+* [9]  https://learningpenguin.net/2020/02/06/a-simple-algorithm-for-calculating-the-result-of-rock-paper-scissors-game/
 * */
