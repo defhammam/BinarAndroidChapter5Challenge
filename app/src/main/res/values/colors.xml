@@ -8,10 +8,13 @@
     <color name="cyan_A400">#00E5FF</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="brown_500">#795548</color>
     <color name="orange_600">#EF6C00</color>
     <color name="red_500">#F44336</color>
+    <color name="dark_green_custom">#286400</color>
     <color name="light_green_700">#689F38</color>
+    <color name="light_green_500">#8BC34A</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="cyan_transparent">#0000E5FF</color>
+    <color name="custom_transparent">#0000E5FF</color>
 </resources>
