@@ -14,6 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="LinearLayout.Player" parent="Theme.BinarAndroidChapter4Challenge">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">@dimen/_77sdp</item>
+        <item name="android:layout_height">@dimen/_262sdp</item>
+        <item name="android:layout_marginTop">@dimen/_58sdp</item>
+    </style>
+
     <style name="Text.Base" parent="Theme.BinarAndroidChapter4Challenge">
         <item name="android:fontFamily">@font/comic_neue_bold</item>
         <item name="android:textAlignment">center</item>
@@ -21,22 +28,26 @@
     
     <style name="Text.Header" parent="Text.Base">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
-        <item name="android:textSize">35sp</item>
+        <item name="android:layout_height">@dimen/_31sdp</item>
+        <item name="android:textSize">@dimen/_26ssp</item>
     </style>
 
     <style name="Text.Player" parent="Text.Base">
         <item name="android:textColor">@color/light_blue_600</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/_17ssp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">30dp</item>
-        <item name="android:layout_marginTop">75dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_23sdp</item>
+    </style>
+
+    <style name="Text.Result" parent="Text.Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="Base.Button" parent="Theme.BinarAndroidChapter4Challenge">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_height">@dimen/_77sdp</item>
     </style>
 
     <style name="Base.Icon" parent="Theme.BinarAndroidChapter4Challenge">

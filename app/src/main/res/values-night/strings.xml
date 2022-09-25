@@ -13,4 +13,6 @@
     <string name="bot_rock_button">Button to indicate that the bot has chosen \"rock\"</string>
     <string name="bot_paper_button">Button to indicate that the bot has chosen \"paper\"</string>
     <string name="bot_scissors_button">Button to indicate that the bot has chosen \"scissors\"</string>
+    <string name="text_result_win">MENANG!</string>
+    <string name="text_result_draw">SERI</string>
 </resources>
