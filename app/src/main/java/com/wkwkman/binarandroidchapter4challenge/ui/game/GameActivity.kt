@@ -27,9 +27,12 @@ class GameActivity: AppCompatActivity(), GameListener {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         supportActionBar?.hide()
+        runGame()
+    }
+
+    private fun runGame() {
         gameManager.launchGame()
         getButtonResponses()
-        gameManager.playGame()
     }
 
     private fun getButtonResponses() {
@@ -48,7 +51,7 @@ class GameActivity: AppCompatActivity(), GameListener {
             }
             flReplayButton.setOnClickListener {
                 Log.d(TAG, "getButtonResponses: Replay was clicked")
-                gameManager.launchGame()
+                runGame()
             }
         }
     }
@@ -76,12 +79,21 @@ class GameActivity: AppCompatActivity(), GameListener {
         when (player.playerChoice) {
             // Reference [6]
             // Background color of the selected choice will not be transparent
-            PlayerChoice.ROCK ->
+            PlayerChoice.ROCK -> {
                 ivChoiceRock.setBackgroundResource(R.color.cyan_A400)
-            PlayerChoice.PAPER ->
+                ivChoicePaper.setBackgroundResource(R.color.cyan_transparent)
+                ivChoiceScissors.setBackgroundResource(R.color.cyan_transparent)
+            }
+            PlayerChoice.PAPER -> {
+                ivChoiceRock.setBackgroundResource(R.color.cyan_transparent)
                 ivChoicePaper.setBackgroundResource(R.color.cyan_A400)
-            PlayerChoice.SCISSORS ->
+                ivChoiceScissors.setBackgroundResource(R.color.cyan_transparent)
+            }
+            PlayerChoice.SCISSORS -> {
+                ivChoiceRock.setBackgroundResource(R.color.cyan_transparent)
+                ivChoicePaper.setBackgroundResource(R.color.cyan_transparent)
                 ivChoiceScissors.setBackgroundResource(R.color.cyan_A400)
+            }
             else -> {}
         }
     }

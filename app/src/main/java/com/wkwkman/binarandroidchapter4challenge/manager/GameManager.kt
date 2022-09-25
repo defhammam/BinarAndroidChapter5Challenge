@@ -38,7 +38,7 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
     }
 
     private fun generateBotChoice() {
-        botChoiceIndex = Random.nextInt(0, until = PlayerChoice.values().size)
+        botChoiceIndex = Random.nextInt(0, until = PlayerChoice.values().size - 1)
         bot.playerChoice = getPlayerChoiceByOrdinal(botChoiceIndex)
         listener.onPlayerChoiceSelected(bot)
     }
@@ -75,6 +75,7 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
     private fun setPlayerChoice(newChoice: PlayerChoice = player.playerChoice) {
         player.playerChoice = newChoice
         listener.onPlayerChoiceSelected(player)
+        playGame()
     }
 }
 
