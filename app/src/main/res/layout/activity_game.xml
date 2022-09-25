@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.game.GameActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_95sdp"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_19sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            style="@style/Text.Header"
+            android:text="@string/header_paper"
+            android:textColor="@color/orange_600" />
+
+        <TextView
+            style="@style/Text.Header"
+            android:text="@string/header_scissors"
+            android:textColor="@color/light_green_700" />
+
+        <TextView
+            style="@style/Text.Header"
+            android:text="@string/header_rock"
+            android:textColor="@color/purple_300" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_player"
+        style="@style/LinearLayout.Player"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_header">
+
+        <TextView
+            style="@style/Text.Player"
+            android:text="@string/player_one" />
+
+        <ImageView
+            android:id="@+id/iv_player_rock"
+            style="@style/Base.Button"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/player_rock_button"
+            android:src="@drawable/ic_rock" />
+
+        <ImageView
+            android:id="@+id/iv_player_paper"
+            style="@style/Base.Button"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/player_paper_button"
+            android:src="@drawable/ic_paper" />
+
+        <ImageView
+            android:id="@+id/iv_player_scissors"
+            style="@style/Base.Button"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/player_scissors_button"
+            android:src="@drawable/ic_scissors" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_262sdp"
+        android:layout_marginTop="@dimen/_58sdp"
+        app:layout_constraintTop_toBottomOf="@id/ll_header"
+        app:layout_constraintStart_toEndOf="@id/ll_player"
+        app:layout_constraintEnd_toStartOf="@id/ll_bot">
+
+        <LinearLayout
+            android:id="@+id/ll_result_win"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_75sdp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            tools:background="@color/brown_500">
+
+            <TextView
+                android:id="@+id/tv_winner"
+                style="@style/Text.Result"
+                android:textSize="@dimen/_17ssp"
+                tools:text="Seorang pemain" />
+
+            <TextView
+                style="@style/Text.Result"
+                android:textSize="@dimen/_26ssp"
+                android:text="@string/text_result_win" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_result_draw"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="@dimen/_8sdp">
+
+            <TextView
+                android:id="@+id/tv_result_draw"
+                style="@style/Text.Result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/light_blue_600"
+                android:textSize="@dimen/_26ssp"
+                android:text="@string/text_result_draw" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_versus"
+            style="@style/Text.Base"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_gravity="center"
+            android:textSize="@dimen/_60ssp"
+            android:textColor="@color/red_500"
+            android:text="@string/middle_versus" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bot"
+        style="@style/LinearLayout.Player"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_header">
+
+        <TextView
+            style="@style/Text.Player"
+            android:text="@string/player_cpu" />
+
+        <ImageView
+            android:id="@+id/iv_bot_rock"
+            style="@style/Base.Button"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/bot_rock_button"
+            android:src="@drawable/ic_rock" />
+
+        <ImageView
+            android:id="@+id/iv_bot_paper"
+            style="@style/Base.Button"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/player_paper_button"
+            android:src="@drawable/ic_paper" />
+
+        <ImageView
+            android:id="@+id/iv_bot_scissors"
+            style="@style/Base.Button"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/player_scissors_button"
+            android:src="@drawable/ic_scissors" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_restart_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_77sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio=".5"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            style="@style/Base.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/replay_button_description"
+            android:src="@drawable/ic_refresh" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
