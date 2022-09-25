@@ -155,5 +155,6 @@ References:
 [6] https://stackoverflow.com/questions/8090459/android-dynamically-change-textview-background-color
 [7] https://stackoverflow.com/questions/44096838/kotlin-how-to-get-and-set-a-text-to-textview-in-android-using-kotlin
 [8] https://stackoverflow.com/questions/1492554/set-transparent-background-of-an-imageview-on-android
+[9] https://www.flaticon.com/free-icon/rock_6587391?term=rock%20paper%20scissors&page=1&position=13&page=1&position=13&related_id=6587391&origin=tag
 
  */

@@ -19,7 +19,7 @@ interface GameListener {
     fun onGameFinished(gameState: GameState, gameResult: GameResult)
 }
 
-// Reference [9]
+// Reference [10]
 class RoshamboGameManager(private val listener: GameListener): GameManager {
     private lateinit var player: Player
     private lateinit var bot: Player
@@ -50,7 +50,7 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
 
     private fun findResult() {
         val playerChoiceIndex = PlayerChoice.values().indexOf(player.playerChoice)
-        // Reference [10]
+        // Reference [11]
         val finalResult = when {
             (playerChoiceIndex + 1) % 3 == botChoiceIndex -> GameResult.BOT_WINS
             playerChoiceIndex == botChoiceIndex -> GameResult.DRAW
@@ -81,6 +81,6 @@ class RoshamboGameManager(private val listener: GameListener): GameManager {
 
 /*
 * References:
-* [9]   https://teachinghistory.org/history-content/ask-a-historian/23932
-* [10] https://learningpenguin.net/2020/02/06/a-simple-algorithm-for-calculating-the-result-of-rock-paper-scissors-game/
+* [10]  https://teachinghistory.org/history-content/ask-a-historian/23932
+* [11] https://learningpenguin.net/2020/02/06/a-simple-algorithm-for-calculating-the-result-of-rock-paper-scissors-game/
 * */
