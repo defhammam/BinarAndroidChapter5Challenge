@@ -1,3 +1,10 @@
 package com.wkwkman.binarandroidchapter5challenge.model
 
-data class SliderData()
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class SliderData(
+    val desc: String,
+    val imgSlider: Int
+): Parcelable

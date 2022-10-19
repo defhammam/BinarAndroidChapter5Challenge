@@ -1,60 +1,85 @@
 package com.wkwkman.binarandroidchapter5challenge.ui.resultdialog
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import com.wkwkman.binarandroidchapter5challenge.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.wkwkman.binarandroidchapter5challenge.databinding.FragmentResultMenuDialogBinding
+import com.wkwkman.binarandroidchapter5challenge.enum.GameResult
 
 /**
  * A simple [Fragment] subclass.
  * Use the [ResultMenuDialog.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ResultMenuDialog : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+class ResultMenuDialog : DialogFragment() {
+    private lateinit var binding: FragmentResultMenuDialogBinding
+    private lateinit var result: String
+    private lateinit var name: String
+    private var listener: OnMenuSelectedListener? = null
+    
+    fun setOnMenuSelectedListener(desiredListener: OnMenuSelectedListener) {
+        this.listener = desiredListener
     }
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result_menu_dialog, container, false)
+        binding = FragmentResultMenuDialogBinding.inflate(inflater, container, false)
+        result = arguments?.getString(ARG_DIALOG_RESULT) ?: ""
+        Log.d(ResultMenuDialog::class.java.simpleName, "game result: $result")
+
+        if (result == GameResult.DRAW.toString())
+            binding.tvResultOutcome.text = getString(R.string.text_outcome_draw)
+        else {
+            name = arguments?.getString(ARG_DIALOG_NAME) ?: ""
+            binding.tvResultOutcome.text = getString(R.string.placeholder_outcome_win, name)
+        }
+        
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResultMenuDialog.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ResultMenuDialog().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnRestart.setOnClickListener {
+            listener?.onRestartClicked(this)
+        }
+        binding.btnReturnMenu.setOnClickListener {
+            listener?.onReturnToMenuClicked(this)
+        }
     }
+    
+    companion object {
+        /*private const val EXTRAS_GAME_RESULT = "EXTRAS_GAME_RESULT"
+        private const val EXTRAS_NAME_PLAYER_ONE = "EXTRAS_NAME_PLAYER_ONE"
+        private const val EXTRAS_NAME_PLAYER_TWO = "EXTRAS_NAME_PLAYER_TWO"
+        private const val EXTRAS_NAME_BOT = "EXTRAS_NAME_BOT"
+        
+        fun runActivity(context: Context, endResult: String) {
+            
+        }*/
+        private const val ARG_DIALOG_RESULT = "ARG_DIALOG_RESULT"
+        private const val ARG_DIALOG_NAME = "ARG_DIALOG_NAME"
+        
+        fun newInstance(
+            endResult: String = "other",
+            currentName: String? = ""
+        ) = ResultMenuDialog().apply {
+            arguments = Bundle(2).apply {
+                putString(ARG_DIALOG_RESULT, endResult)
+                putString(ARG_DIALOG_NAME, currentName)
+            }
+        }
+    }
+}
+
+interface OnMenuSelectedListener {
+    fun onRestartClicked(dialog: DialogFragment)
+    fun onReturnToMenuClicked(dialog: DialogFragment)
 }

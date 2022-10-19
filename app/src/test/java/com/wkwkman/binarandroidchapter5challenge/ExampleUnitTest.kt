@@ -1,4 +1,4 @@
-package com.wkwkman.binarandroidchapter4challenge
+package com.wkwkman.binarandroidchapter5challenge
 
 import org.junit.Test
 

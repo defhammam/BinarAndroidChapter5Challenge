@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.BinarAndroidChapter4Challenge" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.BinarAndroidChapter5Challenge" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/light_green_500</item>
         <item name="colorPrimaryVariant">@color/dark_green_custom</item>
@@ -14,14 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="LinearLayout.Player" parent="Theme.BinarAndroidChapter4Challenge">
+    <style name="LinearLayout.Player" parent="Theme.BinarAndroidChapter5Challenge">
         <item name="android:orientation">vertical</item>
         <item name="android:layout_width">@dimen/_77sdp</item>
         <item name="android:layout_height">@dimen/_262sdp</item>
-        <item name="android:layout_marginTop">@dimen/_58sdp</item>
     </style>
 
-    <style name="Text.Base" parent="Theme.BinarAndroidChapter4Challenge">
+    <style name="Text.Base" parent="Theme.BinarAndroidChapter5Challenge">
         <item name="android:fontFamily">@font/comic_neue_bold</item>
         <item name="android:textAlignment">center</item>
     </style>
@@ -46,11 +45,19 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Base.Button" parent="Theme.BinarAndroidChapter4Challenge">
+    <style name="Base.Button" parent="Theme.BinarAndroidChapter5Challenge">
         <item name="android:layout_height">@dimen/_77sdp</item>
     </style>
 
-    <style name="Base.Icon" parent="Theme.BinarAndroidChapter4Challenge">
+    <style name="Base.Icon" parent="Theme.BinarAndroidChapter5Challenge">
         <item name="android:tint">@color/black</item>
+    </style>
+
+    <style name="Base.Text" parent="Theme.BinarAndroidChapter5Challenge">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    
+    <style name="Dialog.Result" parent="Theme.BinarAndroidChapter5Challenge">
+        <item name="android:background">@drawable/bg_edit_text_rounded_white</item>
     </style>
 </resources>

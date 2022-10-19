@@ -5,5 +5,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.menu.MenuActivity">
+    
+    <TextView
+        style="@style/Base.Text"
+        android:id="@+id/tv_menu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_56sdp"
+        android:textSize="@dimen/_26ssp"
+        android:fontFamily="@font/comic_neue_bold"
+        android:textAllCaps="true"
+        android:text="@string/text_menu_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_menu_pvp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_46sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_menu_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_105sdp"
+            android:contentDescription="@string/desc_menu_pvp"
+            android:src="@drawable/ic_landing_page1" />
+
+        <TextView
+            android:id="@+id/tv_menu_pvp"
+            style="@style/Base.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_24ssp"
+            android:fontFamily="@font/comic_neue_bold"
+            tools:text="@string/placeholder_menu_pvp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_menu_pvc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_46sdp"
+        app:layout_constraintTop_toBottomOf="@id/ll_menu_pvp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_105sdp"
+            android:contentDescription="@string/desc_menu_pvp"
+            android:src="@drawable/ic_landing_page2" />
+
+        <TextView
+            android:id="@+id/tv_menu_pvc"
+            style="@style/Base.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_24ssp"
+            android:fontFamily="@font/comic_neue_bold"
+            tools:text="@string/placeholder_menu_pvc" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

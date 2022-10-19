@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.form.FormNameFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/iv_form_name"
+        android:layout_width="@dimen/_155sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:contentDescription="@string/desc_img_landing"
+        android:src="@drawable/ic_landing_page3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv_form_name"
+        style="@style/Base.Text"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/comic_neue_bold"
+        android:textSize="@dimen/_20ssp"
+        android:textAlignment="center"
+        android:text="@string/text_landing_third"
+        app:layout_constraintTop_toBottomOf="@id/iv_form_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    
+    <EditText
+        android:id="@+id/et_set_name"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_38sdp"
+        android:inputType="text"
+        android:hint="@string/hint_form_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_form_name"
+        app:layout_constraintBottom_toTopOf="@id/btn_set_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:autofillHints="Graham" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_set_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:textColor="@color/black"
+        android:text="@string/btn_form_name"
+        app:layout_constraintTop_toBottomOf="@id/et_set_name"
+        app:layout_constraintRight_toRightOf="@id/et_set_name"
+        app:layout_constraintLeft_toLeftOf="@id/et_set_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
-package com.wkwkman.binarandroidchapter4challenge.enum
+package com.wkwkman.binarandroidchapter5challenge.enum
 
 enum class GameState {
-    STARTED, FINISHED
+    STARTED, PLAYER_ONE_TURN, PLAYER_TWO_TURN, FINISHED
 }

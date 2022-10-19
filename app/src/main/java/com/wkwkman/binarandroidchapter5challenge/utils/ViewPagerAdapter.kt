@@ -1,4 +1,4 @@
-package com.wkwkman.binarandroidchapter5challenge.ui.landing
+package com.wkwkman.binarandroidchapter5challenge.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

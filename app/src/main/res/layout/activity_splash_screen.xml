@@ -6,4 +6,25 @@
     android:layout_height="match_parent"
     tools:context="com.wkwkman.binarandroidchapter5challenge.ui.splashscreen.SplashScreenActivity">
 
+    <ImageView
+        android:id="@+id/iv_splashscreen_upper"
+        android:layout_width="@dimen/_155sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:src="@drawable/ic_splash_screen1"
+        android:contentDescription="@string/desc_splashscreen_upper"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    
+    <ImageView
+        android:id="@+id/iv_splashscreen_bottom"
+        android:layout_width="@dimen/_155sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:src="@drawable/ic_splash_screen2"
+        android:contentDescription="@string/desc_splashscreen_bottom"
+        app:layout_constraintTop_toBottomOf="@id/iv_splashscreen_upper"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    
 </androidx.constraintlayout.widget.ConstraintLayout>

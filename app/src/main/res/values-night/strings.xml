@@ -15,4 +15,26 @@
     <string name="bot_scissors_button">Button to indicate that the bot has chosen \"scissors\"</string>
     <string name="text_result_win">MENANG!</string>
     <string name="text_result_draw">SERI</string>
+    <string name="desc_splashscreen_upper">Upper logo in splash screen</string>
+    <string name="desc_splashscreen_bottom">Bottom logo in splash screen</string>
+    <string name="text_landing_first">Bermain suit melawan sesama pemain.</string>
+    <string name="desc_img_landing">Image in first landing page</string>
+    <string name="text_landing_second">Bermain suit melawan komputer.</string>
+    <string name="text_landing_third">Tuliskan namamu di bawah ini:</string>
+    <string name="hint_form_name">Contoh: Graham</string>
+    <string name="btn_form_name">lanjut</string>
+    <string name="text_previous">Previous</string>
+    <string name="text_next">Next</string>
+    <string name="text_menu_title">pilih lawanmu</string>
+    <string name="placeholder_menu_pvp">%s vs Pemain</string>
+    <string name="desc_menu_pvp">PVP logo in menu</string>
+    <string name="placeholder_menu_pvc">%s vs CPU</string>
+    <string name="text_dialog_title">Hasil Permainan</string>
+    <string name="placeholder_outcome_win">%s\nMENANG!</string>
+    <string name="placeholder_turn">Sekarang giliran %s</string>
+    <string name="text_outcome_draw">SERI!</string>
+    <string name="text_name_other_player">Pemain 2</string>
+    <string name="text_name_bot">CPU</string>
+    <string name="text_btn_restart">Main Lagi</string>
+    <string name="text_btn_return_menu">Kembali ke Menu</string>
 </resources>

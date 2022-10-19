@@ -6,41 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.game.GameActivity">
 
-    <LinearLayout
-        android:id="@+id/ll_header"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_95sdp"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_19sdp"
+    <FrameLayout
+        android:id="@+id/fl_close_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_77sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintDimensionRatio=".5"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/replay_button_description"
+            android:src="@drawable/ic_close" />
+    </FrameLayout>
+    
+    <ImageView
+        android:id="@+id/iv_game_header"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_155sdp"
+        android:src="@drawable/ic_splash_screen1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            style="@style/Text.Header"
-            android:text="@string/header_paper"
-            android:textColor="@color/orange_600" />
-
-        <TextView
-            style="@style/Text.Header"
-            android:text="@string/header_scissors"
-            android:textColor="@color/light_green_700" />
-
-        <TextView
-            style="@style/Text.Header"
-            android:text="@string/header_rock"
-            android:textColor="@color/purple_300" />
-    </LinearLayout>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <LinearLayout
         android:id="@+id/ll_player"
         style="@style/LinearLayout.Player"
         android:layout_marginStart="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_header">
+        app:layout_constraintTop_toBottomOf="@id/iv_game_header">
 
         <TextView
+            android:id="@+id/tv_name_left"
             style="@style/Text.Player"
-            android:text="@string/player_one" />
+            tools:text="@string/player_one" />
 
         <ImageView
             android:id="@+id/iv_player_rock"
@@ -71,47 +72,9 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_262sdp"
-        android:layout_marginTop="@dimen/_58sdp"
-        app:layout_constraintTop_toBottomOf="@id/ll_header"
+        app:layout_constraintTop_toBottomOf="@id/iv_game_header"
         app:layout_constraintStart_toEndOf="@id/ll_player"
         app:layout_constraintEnd_toStartOf="@id/ll_bot">
-
-        <LinearLayout
-            android:id="@+id/ll_result_win"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_75sdp"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            tools:background="@color/brown_500">
-
-            <TextView
-                android:id="@+id/tv_winner"
-                style="@style/Text.Result"
-                android:textSize="@dimen/_17ssp"
-                tools:text="Seorang pemain" />
-
-            <TextView
-                style="@style/Text.Result"
-                android:textSize="@dimen/_26ssp"
-                android:text="@string/text_result_win" />
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_result_draw"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="@dimen/_8sdp">
-
-            <TextView
-                android:id="@+id/tv_result_draw"
-                style="@style/Text.Result"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/light_blue_600"
-                android:textSize="@dimen/_26ssp"
-                android:text="@string/text_result_draw" />
-        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_versus"
@@ -129,11 +92,12 @@
         style="@style/LinearLayout.Player"
         android:layout_marginEnd="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_header">
+        app:layout_constraintTop_toBottomOf="@id/iv_game_header">
 
         <TextView
+            android:id="@+id/tv_name_right"
             style="@style/Text.Player"
-            android:text="@string/player_cpu" />
+            tools:text="@string/player_cpu" />
 
         <ImageView
             android:id="@+id/iv_bot_rock"

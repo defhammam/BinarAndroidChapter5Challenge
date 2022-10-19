@@ -1,18 +1,22 @@
-package com.wkwkman.binarandroidchapter4challenge.ui.game
+package com.wkwkman.binarandroidchapter5challenge.ui.game
 
 //import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import com.wkwkman.binarandroidchapter4challenge.R
-import com.wkwkman.binarandroidchapter4challenge.databinding.ActivityGameBinding
-import com.wkwkman.binarandroidchapter4challenge.enum.*
-import com.wkwkman.binarandroidchapter4challenge.manager.GameListener
-import com.wkwkman.binarandroidchapter4challenge.manager.GameManager
-import com.wkwkman.binarandroidchapter4challenge.manager.RoshamboGameManager
-import com.wkwkman.binarandroidchapter4challenge.model.Player
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import com.wkwkman.binarandroidchapter5challenge.R
+import com.wkwkman.binarandroidchapter5challenge.databinding.ActivityGameBinding
+import com.wkwkman.binarandroidchapter5challenge.enum.*
+import com.wkwkman.binarandroidchapter5challenge.manager.*
+import com.wkwkman.binarandroidchapter5challenge.model.Player
+import com.wkwkman.binarandroidchapter5challenge.ui.resultdialog.OnMenuSelectedListener
+import com.wkwkman.binarandroidchapter5challenge.ui.resultdialog.ResultMenuDialog
 
 class GameActivity: AppCompatActivity(), GameListener {
     private val binding: ActivityGameBinding by lazy {
@@ -20,7 +24,35 @@ class GameActivity: AppCompatActivity(), GameListener {
     }
 
     private val gameManager: GameManager by lazy {
-        RoshamboGameManager(this)
+        if (isUsingMultiplayerMode)
+            MultiplayerRoshamboGameManager(this)
+        else
+            RoshamboGameManagerImpl(this)
+    }
+    
+    private val isUsingMultiplayerMode: Boolean by lazy {
+        intent.getBooleanExtra(EXTRAS_MULTIPLAYER_MODE, false)
+    }
+
+    private val playerOneName: String? by lazy {
+        intent.getStringExtra(EXTRAS_NAME)
+    }
+    
+    private val playerTwoName: String by lazy {
+        getString(R.string.text_name_other_player)
+    }
+    
+    private val botName: String by lazy {
+        getString(R.string.text_name_bot)
+    }
+    
+    private fun setPlayerNames() {
+        binding.tvNameLeft.text = playerOneName
+        binding.tvNameRight.text = if (isUsingMultiplayerMode) {
+            playerTwoName
+        } else {
+            botName
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +63,18 @@ class GameActivity: AppCompatActivity(), GameListener {
     }
 
     private fun runGame() {
+        setPlayerNames()
         gameManager.launchGame()
         getButtonResponses()
     }
 
     private fun getButtonResponses() {
         binding.apply {
+            flCloseButton.setOnClickListener {
+                if (playerOneName != null) {
+                    onBackPressed()
+                }
+            }
             ivPlayerRock.setOnClickListener {
                 Log.d(TAG, "getButtonResponses: Player Rock was clicked")
                 gameManager.playerChoseRock()
@@ -49,6 +87,17 @@ class GameActivity: AppCompatActivity(), GameListener {
                 Log.d(TAG, "getButtonResponses: Player Scissors was clicked")
                 gameManager.playerChoseScissors()
             }
+            if (isUsingMultiplayerMode) {
+                ivBotRock.setOnClickListener {
+                    gameManager.setPlayerTwoChoice(PlayerChoice.ROCK)
+                }
+                ivBotPaper.setOnClickListener {
+                    gameManager.setPlayerTwoChoice(PlayerChoice.PAPER)
+                }
+                ivBotScissors.setOnClickListener {
+                    gameManager.setPlayerTwoChoice(PlayerChoice.SCISSORS)
+                }
+            }
             flRestartButton.setOnClickListener {
                 Log.d(TAG, "getButtonResponses: Restart was clicked")
                 runGame()
@@ -58,9 +107,21 @@ class GameActivity: AppCompatActivity(), GameListener {
 
     companion object {
         private val TAG = GameActivity::class.java.simpleName
+        private const val EXTRAS_MULTIPLAYER_MODE = "EXTRAS_MULTIPLAYER_MODE"
+        private const val EXTRAS_NAME = "EXTRAS_NAME"
+
+        fun runActivity(
+            context: Context,
+            isUsingMultiplayerMode: Boolean,
+            name: String?
+        ) {
+            context.startActivity(Intent(context, GameActivity::class.java).apply {
+                putExtra(EXTRAS_MULTIPLAYER_MODE, isUsingMultiplayerMode)
+                putExtra(EXTRAS_NAME, name)
+            })
+        }
     }
 
-    //@SuppressLint("ResourceAsColor")
     override fun onPlayerChoiceSelected(player: Player) {
         val ivChoiceRock: ImageView?
         val ivChoicePaper: ImageView?
@@ -93,15 +154,12 @@ class GameActivity: AppCompatActivity(), GameListener {
                 ivChoicePaper.setBackgroundResource(R.color.custom_transparent)
                 ivChoiceScissors.setBackgroundResource(R.color.cyan_A400)
             }
-            else -> {}
+            else -> return
         }
     }
 
     override fun onGameLaunched() {
         binding.apply {
-            tvVersus.visibility = View.VISIBLE
-            cvResultDraw.visibility = View.INVISIBLE
-            llResultWin.visibility = View.INVISIBLE
             // Reference [8]
             // Reset all choices to be unselected (transparent)
             ivPlayerRock.setBackgroundResource(R.color.custom_transparent)
@@ -110,38 +168,71 @@ class GameActivity: AppCompatActivity(), GameListener {
             ivBotRock.setBackgroundResource(R.color.custom_transparent)
             ivBotPaper.setBackgroundResource(R.color.custom_transparent)
             ivBotScissors.setBackgroundResource(R.color.custom_transparent)
-            // Mitigation in case the string in "winner result" will be concatenated
-            tvWinner.text = ""
+        }
+    }
+    
+    private fun defineDialogData(gameResult: GameResult) {
+        ResultMenuDialog.apply {
+            when (gameResult) {
+                GameResult.DRAW -> newInstance(endResult = gameResult.toString())
+                GameResult.PLAYER_WINS -> newInstance(currentName = playerOneName)
+                else -> {
+                    if (isUsingMultiplayerMode)
+                        newInstance(currentName = playerTwoName)
+                    else
+                        newInstance(currentName = botName)
+                }
+            }
         }
     }
 
     override fun onResultDisplayed(gameResult: GameResult) {
-        binding.tvVersus.visibility = View.INVISIBLE
-        when (gameResult) {
-            GameResult.DRAW -> {
-                binding.apply {
-                    cvResultDraw.visibility = View.VISIBLE
-                    llResultWin.visibility = View.INVISIBLE
+        defineDialogData(gameResult)
+        
+        ResultMenuDialog().apply {
+            setOnMenuSelectedListener(object: OnMenuSelectedListener {
+                override fun onRestartClicked(dialog: DialogFragment) {
+                    dialog.dismiss()
+                    runGame()
                 }
-            }
-            else -> {
-                binding.apply {
-                    cvResultDraw.visibility = View.INVISIBLE
-                    llResultWin.visibility = View.VISIBLE
-                    // Reference [7]
-                    tvWinner.text = when (gameResult) {
-                        GameResult.PLAYER_WINS -> {
-                            llResultWin.setBackgroundResource(R.color.light_green_700)
-                            getString(R.string.player_one)
-                        }
-                        else -> {
-                            llResultWin.setBackgroundResource(R.color.brown_500)
-                            getString(R.string.player_cpu)
-                        }
-                    }
+
+                override fun onReturnToMenuClicked(dialog: DialogFragment) {
+                    dialog.dismiss()
+                    onBackPressed()
+                    onBackPressed()
                 }
+            })
+        }.show(supportFragmentManager, "result dialog")
+    }
+
+    override fun onGameStateChanged(gameState: GameState) {
+        when (gameState) {
+            GameState.STARTED ->
+                setChoiceVisibility(isPlayerOneVisible = true, isPlayerTwoVisible = true)
+            GameState.PLAYER_ONE_TURN -> {
+                setChoiceVisibility(isPlayerOneVisible = true, isPlayerTwoVisible = false)
+                Toast.makeText(this@GameActivity, getString(R.string.placeholder_turn, playerOneName), Toast.LENGTH_SHORT).show()
             }
+            GameState.PLAYER_TWO_TURN -> {
+                setChoiceVisibility(isPlayerOneVisible = false, isPlayerTwoVisible = true)
+                if (isUsingMultiplayerMode)
+                    Toast.makeText(this@GameActivity, getString(R.string.placeholder_turn, playerTwoName), Toast.LENGTH_SHORT).show()
+            }
+            GameState.FINISHED ->
+                setChoiceVisibility(isPlayerOneVisible = true, isPlayerTwoVisible = true)
         }
+    }
+    
+    private fun setChoiceVisibility(isPlayerOneVisible: Boolean, isPlayerTwoVisible: Boolean) {
+        if (isPlayerOneVisible)
+            binding.llPlayer.visibility = View.VISIBLE
+        else
+            binding.llPlayer.visibility = View.INVISIBLE
+
+        if (isPlayerTwoVisible)
+            binding.llBot.visibility = View.VISIBLE
+        else
+            binding.llBot.visibility = View.INVISIBLE
     }
 }
 
